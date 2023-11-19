@@ -1,0 +1,6 @@
+# .gitignore
+
+# Diğer .gitignore kuralları
+
+# .env dosyasını göz ardı et
+.env
