@@ -1,0 +1,23 @@
+
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}Projelerimiz{% endblock title %}
+{% block content %}
+    <div class="container contentContainer">
+        <h2>Projeler</h2> <hr>
+        <div class="row">
+            {% for project in  projects %}
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{ project.t_image }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{project.header|truncatechars:20|safe}}</h5>
+                        <p class="card-text">{{project.body|truncatechars:80|safe}}</p>
+                        <a href="{% url 'projectDetails' project.id %}" class="btn btn-primary">Daha fazla oku...</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

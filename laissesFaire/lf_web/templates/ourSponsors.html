@@ -1,0 +1,22 @@
+
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}Sponsorlarımız{% endblock title %}
+{% block content %}
+    <div class="container contentContainer">
+    <h2>Sponsorlarımız</h2> <hr>
+        <div class="row">
+                {% for sponsor in  sponsors %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="{{ sponsor.image }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{sponsor.title}}</h5>
+                                <p class="card-text">{{sponsor.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

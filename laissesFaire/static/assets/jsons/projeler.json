@@ -1,0 +1,83 @@
+[
+    {
+        "header": "Depremzedelere Powerbank Projesi",
+        "body": "Ülkemizde yaşanan üzücü depremden sonra hemen harekete geçerek powerbank ürettik ve deprem bölgesine Hatay'a 200 adet kendi ürettiğimiz powerbanki gönderdik ve bu powerbanklerden diğer takımlar da üretebilsin diye tasarım dosyalarını herkese açık halde paylaştık.",
+        "t_image": "powerbank.jpeg",
+        "image_1": "powerbank_alt1.jpeg",
+        "image_2": "powerbank_alt2.jpeg",
+        "btn": "Powerbank dokümanlarına ulaşmak için tıklayınız",
+        "href": "#"
+    },
+    {
+        "header": "Rookie Takımlara Mekanik Destek",
+        "body": "İzmir'de 2'si rookie toplamda 3 takıma kendi atölyemizde düzenlediğimiz etkinlikle malzeme ve teknik destek sağladık. Onlarla birlikte bumper yaptık ve robotlarının kod, tasarım bölümüne yardımcı olduk.",
+        "t_image": "takim_yardim.jpeg",
+        "image_1": "takim_yardim_alt1.jpeg",
+        "image_2": "takim_yardim_alt2.jpeg"
+    },
+    {
+        "header": "Fuarlarda FIRST Sunumu ve Küçük Yaş Gruplarına Eğitim",
+        "body": "İEF, WeCycle, ExpoTech gibi fuarlarda FIRST ve Mühendisliği halka yaydık sunumlar yaptık. Fuarlarda küçük yaş gruplarına WeDo 3.o eğitimi verdik.",
+        "t_image": "fuar.jpeg",
+        "image_1": "fuar_alt1.jpeg",
+        "image_2": "fuar_alt2.jpeg"
+    },
+    {
+        "header": "LF Akademi",
+        "body": "LF akademi adlı mühendis öğrenci yetiştirme odaklı her alanda (iletişim, tasarım, CAD, makine, elektrik elektronik...) eğitim vereceğimiz bir kuruluş oluşturduk. Eğitimlerimize yaz tatili itibariyle başladık. Daha fazla bilgiyi sitemizdeki \"LF Akademi\" sekmesinden bulabilirsiniz.",
+        "t_image": "lf_akademi.jpeg"
+    },
+    {
+        "header": "Engelsiz Periyodik Tablo",
+        "body": "Engelsiz bir periyodik tablo oluşturarak her elementi sesli bir şekilde okuyan bir periyodik tablo geliştirdik. 9. sınıf öğrencileriyle projemizi paylaştık ve geri dönütler aldık.",
+        "t_image": "periyodik_tablo.jpeg",
+        "image_1": "periyodik_tablo_alt1.jpeg",
+        "image_2": "periyodik_tablo_alt2.jpeg"
+    },
+    {
+        "header": "Çocuklara Robotik Eğitimi",
+        "body": "EÇEV ve Seferihisar çocuk belediyesinde çocuklara satranç, trafik ve robotik eğitimi verdik",
+        "t_image": "ecev.jpeg",
+        "image_1": "ecev_alt1.jpeg",
+        "image_2": "ecev_alt2.jpeg"
+    },
+    {
+        "header": "Menstrüasyon Sunumu",
+        "body": "Tabuları yıkmak ve ilham olmak üzere kız erkek karışık toplamda 220 9. sınıf öğrencisine menstrüasyon hakkında sunumlar yaptık, onları bilinçlendirdik.",
+        "t_image": "menstruasyon.jpeg",
+        "image_1": "menstruasyon_alt1.jpeg",
+        "image_2": "menstruasyon_alt2.jpeg"
+    },
+    {
+        "header": "#GIRLSINSTEM",
+        "body": "Takım olarak kadınların mühendislik alanlarında kendilerini geliştirmeleri ve göstermeleri her zaman önceliğimiz oldu.",
+        "t_image": "girlsinstem.jpeg",
+        "image_1": "girlsinstem_alt1.jpeg",
+        "image_2": "girlsinstem_alt2.jpeg"
+    },
+    {
+        "header": "Filament Projesi",
+        "body": "Pet şişeden filament üreten bir makine tasarlayarak bu filamentlerle ürettiğimiz parçaları robotumuzun mekanik aksamlarında kullandık.",
+        "t_image": "filament.jpeg",
+        "image_1": "filament_alt1.jpeg"
+    },
+    {
+        "header": "Deprem Sonrası Yardım",
+        "body": "Depremden sonra İzmir Mimarlar Odasında AFAD için veri girişi yaptık. Tepekule Kongre Merkezinde depremzedeler için eşya paketlemesi, taşıması ve yardımı yaptık.",
+        "t_image": "deprem_sonrasi.jpeg",
+        "image_1": "deprem_sonrasi_alt1.jpeg",
+        "image_2": "deprem_sonrasi_alt2.jpeg"
+    },
+    {
+        "header": "FIRST Programları Gönüllüğü",
+        "body": "Bu sene düzenlenen FLL (FIRST Lego League) turnuvalarında ve WRO turnuvasında gönüllü olduk.",
+        "t_image": "first.jpeg",
+        "image_1": "first_alt1.jpeg"
+    },
+    {
+        "header": "Devlet Okulu FLL Takımına Destek",
+        "body": "Teknik ve proje açısından eksikleri olan devlet okulu olan 30 Ağustos Ortaokulu FLL (FIRST Lego League) takımı Robokod Kozmos'a destek verdik.",
+        "t_image": "fll_alt1.jpeg",
+        "image_1": "fll_alt2.jpeg"
+    }
+]

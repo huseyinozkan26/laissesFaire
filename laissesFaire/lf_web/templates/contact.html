@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}İletişim{% endblock title %}
+{% block content %}
+    <div class="container contentContainer">
+        <h2 class="mb-4">İletişim Formu</h2>
+        <form method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-outline-primary" type="submit">Gönder</button>
+        </form>
+    </div>
+{% endblock content %}

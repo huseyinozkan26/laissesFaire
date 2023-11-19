@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Sayfa{% endblock title %}
+{% block content %}
+    <div class="container contentContainer">
+        <h2>{{pageValues.title}}</h2>
+        <hr>
+        <div class="content">
+            {{pageValues.content|safe}}
+        </div>
+    </div>
+{% endblock content %}
+

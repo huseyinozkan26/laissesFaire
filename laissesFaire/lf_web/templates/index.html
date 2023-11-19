@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Ana Sayfa{% endblock title %}Ana Sayfa
+{% block content %}
+
+    {% include "partials/newsCourosel.html" %}
+
+    <div class="container contentContainer" id="aboutUs">
+        <h2>Hakkımızda</h2>
+        <hr>
+        <div class="content">
+            {{aboutUs.content|safe}}
+        </div>
+    </div>
+{% endblock content %}

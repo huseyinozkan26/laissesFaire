@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}Proje{% endblock title %}
+{% block content %}
+    <div class="container contentContainer">
+        <h2>{{project.header}}</h2>
+        <hr>
+        <div class="content">
+           <div class="row">
+                <div class="col-md-6">
+                    <div id="detailCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active" data-bs-interval="2000">
+                            <img src="../../{{ project.t_image }}" class="d-block w-100" alt="...">
+                          </div>
+                          {% if project.image_1 %}
+                            <div class="carousel-item" data-bs-interval="5000">
+                                <img src="../../{{ project.image_1 }}" class="d-block w-100" alt="...">
+                            </div>
+                          {% endif %}
+                          {% if project.image_2 %}
+                            <div class="carousel-item" data-bs-interval="5000">
+                                <img src="../../{{ project.image_2 }}" class="d-block w-100" alt="...">
+                            </div>
+                          {% endif %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#detailCarousel" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#detailCarousel" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    {{project.body|safe}}
+                </div>
+           </div>
+
+        </div>
+    </div>
+{% endblock content %}
+
