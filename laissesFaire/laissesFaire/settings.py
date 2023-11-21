@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['lf8056.com.tr', '45.139.199.131', 'localhost', '127.0.0.1']
 
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+SECURE_SSL_REDIRECT = True
 # Application definition
 
 INSTALLED_APPS = [
