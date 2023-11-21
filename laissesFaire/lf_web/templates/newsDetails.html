@@ -13,21 +13,11 @@
                           <div class="carousel-item active" data-bs-interval="2000">
                             <img src="../../{{ news.head_image }}" class="d-block w-100" alt="...">
                           </div>
-                          {% if news.image_1 %}
+                          {% for image in news.images.all %}
                             <div class="carousel-item" data-bs-interval="5000">
-                                <img src="../../{{ news.image_1 }}" class="d-block w-100" alt="...">
+                              <img src="../../{{ image.image.url }}" class="d-block w-100" alt="...">
                             </div>
-                          {% endif %}
-                          {% if news.image_2 %}
-                            <div class="carousel-item" data-bs-interval="5000">
-                                <img src="../../{{ news.image_2 }}" class="d-block w-100" alt="...">
-                            </div>
-                          {% endif %}
-                          {% if news.image_3 %}
-                            <div class="carousel-item" data-bs-interval="5000">
-                                <img src="../../{{ news.image_3 }}" class="d-block w-100" alt="...">
-                            </div>
-                          {% endif %}
+                          {% endfor %}
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#detailCarousel" data-bs-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>

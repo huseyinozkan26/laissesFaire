@@ -82,16 +82,19 @@ class News(models.Model):
     desc = models.TextField(blank=True)
     head_image = models.ImageField(blank=False, upload_to="static/assets/upload/news")
     timestamp = models.DateTimeField(default=timezone.now)
-    image_1 = models.ImageField(blank=True, upload_to="static/assets/upload/news")
-    image_2 = models.ImageField(blank=True, upload_to="static/assets/upload/news")
-    image_3 = models.ImageField(blank=True, upload_to="static/assets/upload/news")
+    images = models.ManyToManyField('Image', blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.header}"
+
     def get_absolute_url(self):
         return reverse('haber_detay', args=[str(self.id)])
 
+class Image(models.Model):
+    image = models.ImageField(upload_to="static/assets/upload/news")
 
+    def __str__(self):
+        return f"{self.image}"
 
     
