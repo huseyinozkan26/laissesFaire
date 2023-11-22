@@ -8,12 +8,11 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 """
 
 import os
-import sys
+import django
+from django.core.handlers.wsgi import WSGIHandler
 
-path = '/var/www/django/laissesFaire/laissesFaire'  # Django proje dizininin yolu
-if path not in sys.path:
-    sys.path.append(path)
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'laissesFaire.settings')
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "eisentask.settings.production")
+django.setup(set_prefix=False)
+
+application = WSGIHandler()
