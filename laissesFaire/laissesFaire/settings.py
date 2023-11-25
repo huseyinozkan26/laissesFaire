@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'bootstrap5',
-    'gmailapi_backend',
     'crispy_forms',
     'rest_framework',
     'lf_web'
