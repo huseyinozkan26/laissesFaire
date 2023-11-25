@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-
+import json
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -21,7 +21,7 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-#SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'bootstrap5',
+    # 'bootstrap5',
+    'gmailapi_backend',
     'crispy_forms',
     'rest_framework',
     'lf_web'
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'laissesFaire.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-         'DIRS': [
+        'DIRS': [
             BASE_DIR / "templates"
         ],
         'APP_DIRS': True,
@@ -78,7 +79,7 @@ WSGI_APPLICATION = 'laissesFaire.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-   'default': {
+    'default': {
         'ENGINE': os.getenv('DB_ENGINE'),
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
@@ -120,6 +121,19 @@ USE_I18N = True
 USE_TZ = True
 
 
+#email settings 
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+# EMAIL_PORT = 587  # üretim modunda bu seçeneği kullanın
+EMAIL_PORT = os.getenv('GMAIL_USER') # bu seçeneği debug modu aktifken kullanın
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+#iletişim sayfasından gönderilen e-postalar nereye gidecek
+EMAIL_ADMIN = os.getenv('EMAIL_ADMIN')
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -133,4 +147,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
 
 }
-
