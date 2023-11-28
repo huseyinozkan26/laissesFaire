@@ -16,6 +16,6 @@ urlpatterns = [
     path('haber/<int:news_id>/', views.newsDetails, name='newsDetails'),
     path("contact", views.contact),
     path("sponsorlarimiz", views.ourSponsors),
-    path('<page>', views.page),
-
+    path("register",views.create_student, name="Student Register Form"),
+    path('<page>', views.page)
 ]

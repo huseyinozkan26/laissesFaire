@@ -1,5 +1,6 @@
+from django.contrib.auth.models import User, AbstractUser
 from django.db import models
-from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 from datetime import datetime
 from django.utils import timezone
 from django.urls import reverse
@@ -36,9 +37,8 @@ class team_roles(models.Model):
         return f"{self.name}"
     
 class team_member(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    role = models.ManyToManyField(team_roles)
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='team_member')
+    role = models.ManyToManyField(team_roles, related_name='team_members')
     def __str__(self):
         return f"{self.user.username} | {self.user.first_name} {self.user.last_name}"
     
@@ -51,6 +51,23 @@ class contact_form(models.Model):
 
     def __str__(self):
         return f"{self.fullName}"
+
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone_number = PhoneNumberField(blank=True, null=True)
+    birth_date = models.DateField(null=True, blank=True)
+    school_name = models.CharField(max_length=100, blank=True)
+    gender_choices = [('male', 'Erkek'), ('female', 'Kadın'), ('other', 'Belirtmek istemiyorum')]
+    gender = models.CharField(max_length=10, choices=gender_choices, blank=True)
+    parent_first_name = models.CharField(max_length=30, blank=True)
+    parent_last_name = models.CharField(max_length=30, blank=True)
+    parent_email = models.EmailField(max_length=254, blank=True)
+    parent_phone_number = PhoneNumberField(blank=True, null=True)
+    parent_relationship_choices = [('mother', 'Anne'), ('father', 'Baba'), ('other', 'Diğer')]
+    parent_relationship = models.CharField(max_length=10, choices=parent_relationship_choices, blank=True)
+
+    def __str__(self):
+        return self.user.username if self.user else 'No User'
     
 class projects(models.Model):
     header = models.CharField(max_length=144, blank=False)

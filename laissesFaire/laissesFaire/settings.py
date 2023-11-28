@@ -34,11 +34,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'bootstrap5',
+    'bootstrap5',
+    'phonenumber_field',
     'crispy_forms',
     'rest_framework',
     'lf_web'
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

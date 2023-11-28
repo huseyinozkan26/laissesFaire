@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404
 from .models import page as pages, main_nav as Main_nav, team_member, projects as Projects, Sponsors, News, contact_form as Contact
-from .forms import ContactForm
+from .forms import ContactForm, StudentForm
+from django.contrib.auth import login
+from django.core.mail import EmailMessage
 
 
 def get_main_nav():
@@ -84,7 +86,6 @@ def contact(request):
             message = form.cleaned_data['message']
             # eposta gönderme
 
-            print(settings.EMAIL_ADMIN)
             try:
                 # EmailMessage nesnesi oluşturun
                 mail_subject = f'{name} isimli kişinin | {email} e-posta adresi ile iletişim formu mesajı'
@@ -109,7 +110,7 @@ def contact(request):
             return render(request, 'success.html', {'name': name, 'navigation': navigation})
     else:
         form = ContactForm()
-    return render(request, 'contact.html', {'form': form, 'navigation': navigation})
+    return render(request, 'forms/contact.html', {'form': form, 'navigation': navigation})
 
 
 def academy(request):
@@ -136,6 +137,20 @@ def page(request, page):
             }
         })
 
+def create_student(request):
+    navigation = get_main_nav()
+    
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            kullanici_adi = form.cleaned_data['username']
+            return render(request, 'formSuccess.html',{
+                'navigation': navigation,
+                'message': "Tebrikler, "+kullanici_adi+" kullanıcı kaydın başarıyla alındı.<br>Giriş bilgilerin admin tarafından onaylandığında sisteme giriş yapabileceksin."
 
-from django.core.mail import EmailMessage
+            })
+    else:
+        form = StudentForm()
 
+    return render(request, 'forms/register.html', {'form': form, 'navigation': navigation})
