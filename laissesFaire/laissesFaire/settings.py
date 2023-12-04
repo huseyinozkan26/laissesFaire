@@ -8,6 +8,8 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGIN_URL = '/academy/login/'  # veya '/Academy/login/' (URL yapısına bağlı olarak)
+LOGOUT_REDIRECT_URL = '/academy/login/'  # veya '/Academy/login/' (URL yapısına bağlı olarak)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -38,7 +40,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'rest_framework',
-    'lf_web'
+    'lf_web',
+    'Academy'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
@@ -68,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.static',
+                'Academy.context_processors.sidebar_data',
             ],
         },
     },
