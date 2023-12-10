@@ -38,7 +38,8 @@ def logout_view(request):
 
 @login_required
 def dashboard_view(request):
-    return render(request, 'academy/index.html')
+    watched_contents = WatchedContent.objects.filter(user=request.user).order_by('-last_watched_timestamp')
+    return render(request, 'academy/index.html', {"watched_contents":watched_contents})
 
 
 @login_required
@@ -88,11 +89,13 @@ def show_content(request, content_id):
 def update_watched_duration(request):
     content_id = request.POST.get('content_id')
     watched_duration = request.POST.get('watched_duration')
+    watched_percentage = request.POST.get('watched_percentage')
 
     # İzleme durumu bilgisini güncelle
     try:
         watched_content = WatchedContent.objects.get(content_id=content_id, user=request.user)
         watched_content.watched_duration = watched_duration
+        watched_content.watched_percentage = watched_percentage
         watched_content.save()
     except WatchedContent.DoesNotExist:
         # Eğer izleme durumu kaydı yoksa, oluşturabilirsiniz

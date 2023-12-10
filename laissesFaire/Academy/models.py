@@ -47,6 +47,7 @@ class WatchedContent(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     watched_duration = models.PositiveIntegerField(default=0)
     last_watched_timestamp = models.DateTimeField(auto_now=True)
+    watched_percentage = models.FloatField(default=0)
 
     def __str__(self):
         return f"{self.user.username} - {self.content.title}"

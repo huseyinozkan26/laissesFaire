@@ -33,22 +33,24 @@
                 // Video.js olaylarını dinleyerek durumu güncelleyin
                 player.on('timeupdate', function () {
                 if (Math.floor(player.currentTime()) % 10 === 0) {
-                    updateWatchedDuration(player.currentTime());
+                    updateWatchedDuration(player.currentTime(), player.duration());
                 }
                 });
             
                 // "seeked" olayını dinleyerek izleme durumunu güncelleyin
                 player.on('seeked', function () {
-                updateWatchedDuration(player.currentTime());
+                updateWatchedDuration(player.currentTime(), player.duration());
                 });
             
-                function updateWatchedDuration(currentTime) {
+                function updateWatchedDuration(currentTime, totalDuration) {
+                var watchedPercentage = (currentTime / totalDuration) * 100;
                 $.ajax({
                     url: '/academy/update_watched_duration/',
                     type: 'POST',
                     data: {
                     'content_id': contentId,
                     'watched_duration': Math.floor(currentTime),
+                    'watched_percentage': watchedPercentage,
                     'csrfmiddlewaretoken': csrfToken,
                     },
                     dataType: 'json',
