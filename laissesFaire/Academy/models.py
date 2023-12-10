@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Level(models.Model):
     name = models.CharField(max_length=100)
@@ -13,6 +14,7 @@ class Level(models.Model):
 class Course(models.Model):
     name = models.CharField(max_length=100)
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    menu_icon = models.CharField(max_length=100, default="fa-graduation-cap")
 
     def __str__(self):
         return self.name
@@ -23,6 +25,7 @@ class Topic(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     order = models.IntegerField(default=0)
+    menu_icon = models.CharField(max_length=100, default="fa-graduation-cap")
 
     def __str__(self):
         return self.name
@@ -39,3 +42,11 @@ class Content(models.Model):
     def __str__(self):
         return self.title
 
+class WatchedContent(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    watched_duration = models.PositiveIntegerField(default=0)
+    last_watched_timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.content.title}"

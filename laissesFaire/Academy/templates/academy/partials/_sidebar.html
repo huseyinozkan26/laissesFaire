@@ -32,7 +32,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#{{ course.name|slugify }}"
                 aria-expanded="true" aria-controls="{{ course.name|slugify }}">
-                <i class="fas fa-fw fa-graduation-cap"></i>
+                <i class="fas fa-fw {{ course.menu_icon }}"></i>
                 <span>{{ course.name }}</span>
             </a>
             <div id="{{ course.name|slugify }}" class="collapse" aria-labelledby="{{ course.name|slugify }}Heading"
@@ -40,7 +40,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     {% for topic in topics %}
                         {% if topic.course == course %}
-                            <a class="collapse-item" href="#">{{ topic.name }}</a>
+                            <a class="collapse-item" href="{% url 'content_list' topic.id %}">{{ topic.name }}</a>
                         {% endif %}
                     {% endfor %}
                     <div class="collapse-divider"></div>

@@ -4,8 +4,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
+
 from .forms import UserProfileForm, PasswordResetForm
-from .models import Course, Topic
+
+from .models import Course, Topic, Content, WatchedContent
 
 
 def login_view(request):
@@ -64,3 +70,41 @@ def profile_view(request):
 @login_required
 def settings_view(request):
     return render(request, "academy/settings.html")
+
+
+@login_required
+def content_list(request, topic_id):
+    topic = Topic.objects.get(pk=topic_id)
+    contents = Content.objects.filter(topic=topic)
+    return render(request, 'academy/content_list.html', {'topic': topic, 'contents': contents})
+
+@login_required
+def show_content(request, content_id):
+    content = Content.objects.get(pk=content_id)
+    return render(request, 'academy/show_content.html', {"content": content})
+
+
+@require_POST
+def update_watched_duration(request):
+    content_id = request.POST.get('content_id')
+    watched_duration = request.POST.get('watched_duration')
+
+    # İzleme durumu bilgisini güncelle
+    try:
+        watched_content = WatchedContent.objects.get(content_id=content_id, user=request.user)
+        watched_content.watched_duration = watched_duration
+        watched_content.save()
+    except WatchedContent.DoesNotExist:
+        # Eğer izleme durumu kaydı yoksa, oluşturabilirsiniz
+        WatchedContent.objects.create(content_id=content_id, user=request.user, watched_duration=watched_duration)
+
+    return JsonResponse({'success': True})
+
+
+def get_watched_duration(request):
+    content_id = request.GET.get('content_id')
+    try:
+        watched_content = WatchedContent.objects.get(content_id=content_id, user=request.user)
+        return JsonResponse({'success': True, 'watched_duration': watched_content.watched_duration})
+    except WatchedContent.DoesNotExist:
+        return JsonResponse({'success': False})

@@ -1,0 +1,96 @@
+{% extends "academy/academy_layout.html" %}
+{% block title %}Ana Sayfa{% endblock title %}
+{% block content %}
+    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
+    <div class="container contentContainer" id="main">
+        <h3>{{content.title}}</h3><hr>
+       <div class="container text-center">
+        <video id="content_video" class="video-js"
+            controls
+            preload="auto"
+            width="800"
+            height="450"
+            data-setup="{}"
+        >
+            <source src="{{ content.file.url }}" type="video/mp4">
+            <!-- Diğer video formatları için gereken kaynakları ekleyebilirsiniz -->
+          </video>
+          
+       </div>
+       <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
+          {# İzleme durumu için gerekli bilgileri saklayın #}
+          <script>
+            var contentId = {{ content.id }};
+            var csrfToken = "{{ csrf_token }}";
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var player = videojs('content_video');
+
+            
+                // Sayfa yüklendiğinde izleme durumunu kontrol et
+                checkWatchedDuration();
+            
+                // Video.js olaylarını dinleyerek durumu güncelleyin
+                player.on('timeupdate', function () {
+                if (Math.floor(player.currentTime()) % 10 === 0) {
+                    updateWatchedDuration(player.currentTime());
+                }
+                });
+            
+                // "seeked" olayını dinleyerek izleme durumunu güncelleyin
+                player.on('seeked', function () {
+                updateWatchedDuration(player.currentTime());
+                });
+            
+                function updateWatchedDuration(currentTime) {
+                $.ajax({
+                    url: '/academy/update_watched_duration/',
+                    type: 'POST',
+                    data: {
+                    'content_id': contentId,
+                    'watched_duration': Math.floor(currentTime),
+                    'csrfmiddlewaretoken': csrfToken,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                    // Başarılı tamamlandığında yapılacak işlemler
+                    },
+                    error: function (error) {
+                    console.log('Hata:', error);
+                    }
+                });
+                }
+            
+                function checkWatchedDuration() {
+                // Sayfa yüklendiğinde, izleme durumunu kontrol et ve videoyu uygun yerden başlat
+                $.ajax({
+                    url: '/academy/get_watched_duration/',  // Uygun URL'yi ayarla
+                    type: 'GET',
+                    data: {
+                    'content_id': contentId,
+                    'csrfmiddlewaretoken': csrfToken,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                    // İzleme durumu bilgisini kontrol et
+                    if (data.success) {
+                        var watchedDuration = parseInt(data.watched_duration);
+                        if (!isNaN(watchedDuration) && watchedDuration > 0) {
+                        // İzleme durumu bilgisi varsa, videoyu uygun yerden başlat
+                        player.currentTime(watchedDuration);
+                        }
+                    }
+                    },
+                    error: function (error) {
+                    console.log('Hata:', error);
+                    }
+                });
+                }
+            });
+            
+
+          </script>
+          
+          
+    </div>
+{% endblock content %}

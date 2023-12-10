@@ -1,0 +1,19 @@
+{% extends "academy/academy_layout.html" %}
+{% block title %}Dersler |  {% endblock title %}
+{% block content %}
+
+    <div class="container contentContainer" id="main">
+        <h3>{{topic.name}}</h3><hr>
+        <div class="row">
+            {% for content in contents %}
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{content.title}}</h5>
+                  <a href="{% url 'show_content' content.id %}" class="btn btn-primary">Derse Git</a>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
