@@ -142,6 +142,9 @@ EMAIL_ADMIN = os.getenv('EMAIL_ADMIN')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 500  # 500 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 500  # 500 MB
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Default primary key field type
