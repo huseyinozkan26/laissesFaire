@@ -7,7 +7,9 @@
         <div class="row">
             {% for content in contents %}
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+               {% if content.image != "" %}
+               <img src="{{content.image.url}}" class="card-img-top" alt="...">
+               {% endif %}
                 <div class="card-body">
                   <h5 class="card-title">{{content.title}}</h5>
                   <a href="{% url 'show_content' content.id %}" class="btn btn-primary">Derse Git</a>

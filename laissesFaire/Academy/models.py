@@ -38,6 +38,7 @@ class Content(models.Model):
     content_type_choices = [('scorm', 'Scorm'), ('video', 'Video')]
     content_type = models.CharField(max_length=10, choices=content_type_choices)
     file = models.FileField(upload_to="static/assets/uploads/academy/contents")
+    image = models.ImageField(upload_to="static/assets/uploads/academy/contentImg", blank=True)
 
     def __str__(self):
         return self.title
