@@ -7,13 +7,13 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ user_profile_form.as_p }}
-            <button type="submit" class="btn btn-primary">Profil Güncelle</button>
+            <button type="submit" class="btn btn-danger">Profil Güncelle</button>
         </form>
         <hr><h3>Şifre Sıfırlama: </h3>
         <form method="post">
             {% csrf_token %}
             {{ password_reset_form.as_p }}
-            <button type="submit" class="btn btn-primary">Şifre Sıfırla</button>
+            <button type="submit" class="btn btn-danger">Şifre Sıfırla</button>
         </form>
     </div>
 {% endblock content %}

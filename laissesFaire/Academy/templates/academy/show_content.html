@@ -2,29 +2,41 @@
 {% block title %}Ana Sayfa{% endblock title %}
 {% block content %}
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
-    <div class="container contentContainer" id="main">
-        <h3>{{content.title}}</h3><hr>
-       <div class="container text-center">
-        <video id="content_video" class="video-js"
-            controls
-            preload="auto"
-            width="800"
-            height="450"
-            data-setup="{}"
-        >
-            <source src="{{ content.file.url }}" type="video/mp4">
-            <!-- Diğer video formatları için gereken kaynakları ekleyebilirsiniz -->
-          </video>
-          
-       </div>
-       <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
+
+
+                <div class="container">
+                    <div class="row justify-content-left">
+                      <div class="col-md-12">
+                        {{content.title}}
+                        <div class="embed-responsive embed-responsive-16by9">
+                          <video 
+                          id="content_video" 
+                          class="video-js embed-responsive-item"
+                          controls
+                          preload="auto"
+                          data-setup="{}"
+                          >
+                          <source src="{{ content.file.url }}" type="video/mp4">
+                          <!-- Diğer video formatları için gereken kaynakları ekleyebilirsiniz -->
+                        </video>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               
+     
+       <script src='https://vjs.zencdn.net/8.6.1/video.min.js' >
+
+       </script>
           {# İzleme durumu için gerekli bilgileri saklayın #}
           <script>
             var contentId = {{ content.id }};
             var csrfToken = "{{ csrf_token }}";
 
             document.addEventListener('DOMContentLoaded', function () {
-                var player = videojs('content_video');
+                var player = videojs('content_video',{
+                  fluid: true
+                });
 
             
                 // Sayfa yüklendiğinde izleme durumunu kontrol et
@@ -92,7 +104,4 @@
             
 
           </script>
-          
-          
-    </div>
 {% endblock content %}

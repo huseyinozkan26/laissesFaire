@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'lf_web',
+    'fontawesomefree',
     'Academy'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
