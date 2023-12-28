@@ -17,5 +17,6 @@ urlpatterns = [
     path("contact", views.contact),
     path("sponsorlarimiz", views.ourSponsors),
     path("register",views.create_student, name="Student Register Form"),
+    path("application",views.apply_view, name="Student Application Form"),
     path('<page>', views.page)
 ]

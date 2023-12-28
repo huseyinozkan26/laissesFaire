@@ -1,0 +1,17 @@
+{% extends 'web_layout.html' %}
+{% block title %}
+  Başvuru Formu
+{% endblock %}
+{% block content %}
+  <div class="container contentContainer">
+    <h2>Başvuru Formu</h2>
+    {% if message %}
+      <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endif %}
+    <form method="post" class="form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Başvur</button>
+    </form>
+  </div>
+{% endblock %}

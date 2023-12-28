@@ -125,3 +125,44 @@ class StudentForm(forms.ModelForm):
         )
 
         return user, Students
+    
+
+class ApplicationForm(forms.Form):
+    name = forms.CharField(
+        label='İsim',
+        max_length=100,
+        widget=forms.TextInput(attrs={"class": "form-control col-md-4"})
+    )
+
+    surname = forms.CharField(
+        label='Soyisim',
+        max_length=100,
+        widget=forms.TextInput(attrs={"class": "form-control col-md-4"})
+    )
+
+    age = forms.IntegerField(
+        label='Yaş',
+        widget=forms.NumberInput(attrs={"class": "form-control col-md-4"})
+    )
+
+    school_name = forms.CharField(
+        label='Okul Adı',
+        max_length=100,
+        widget=forms.TextInput(attrs={'class': 'form-control col-md-6'})
+    )
+
+    school_level = forms.CharField(
+        label='Sınıf Seviyesi',
+        widget=forms.TextInput(attrs={'class': 'form-control col-md-6'})
+    )
+
+    email = forms.EmailField(
+        label="E-posta",
+        widget=forms.EmailInput(attrs={'class': 'form-control col-md-6'})
+    )
+
+    phone_number = forms.CharField(
+        label="Telefon numarası:",
+        widget=forms.TextInput(attrs={'class': 'form-control col-md-6'})
+    )
+    

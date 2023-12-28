@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import page as pages, main_nav as Main_nav, team_member, projects as Projects, Sponsors, News, contact_form as Contact
-from .forms import ContactForm, StudentForm
+from .models import page as pages, main_nav as Main_nav, team_member, projects as Projects, Sponsors, News, contact_form as Contact, Application
+from .forms import ContactForm, StudentForm, ApplicationForm
 from django.contrib.auth import login
 from django.core.mail import EmailMessage
 
@@ -154,3 +154,39 @@ def create_student(request):
         form = StudentForm()
 
     return render(request, 'forms/register.html', {'form': form, 'navigation': navigation})
+
+def apply_view(request):
+
+    navigation = get_main_nav()
+
+    if request.method == 'POST':
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            # Aynı e-posta adresi veya telefon numarasına sahip bir başvuru var mı kontrol et
+            existing_application = Application.objects.filter(
+                email=form.cleaned_data['email']  # veya phone_number=form.cleaned_data['phone_number']
+            ).exists()
+
+            if not existing_application:
+                application = Application(
+                    name=form.cleaned_data['name'],
+                    surname=form.cleaned_data['surname'],
+                    age=form.cleaned_data['age'],
+                    school_name=form.cleaned_data['school_name'],
+                    school_level=form.cleaned_data['school_level'],
+                    email=form.cleaned_data['email'],
+                    phone_number=form.cleaned_data['phone_number']
+                )
+                
+                application.save()
+                return render(request, 'forms/application.html', {
+                    'message': "Başvurunuz başarıyla alındı.",
+                    "form": form,
+                    "navigation" : navigation
+                })
+            else:
+                form.add_error(None, 'Bu e-posta adresi/telefon numarası ile zaten bir başvuru yapılmış.')
+    else:
+        form = ApplicationForm()
+
+    return render(request, 'forms/application.html', {'form': form, 'navigation': navigation})
