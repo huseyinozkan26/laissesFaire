@@ -2,31 +2,13 @@
 {% block title %}Ana Sayfa{% endblock title %}
 {% block content %}
     <div class="container contentContainer" id="main">
-        <div>
-            <hr>
-            <h3>Tamamladığım / Devam eden derslerim </h3>
-            {% if watched_contents.exists %}
-                <ul class="list-group">
-                    {% for watched_content in watched_contents %}
-                    <li class="list-group-item">
-                        {{ watched_content.content.title }} | 
-                        {% if watched_content.watched_percentage >= 90 %}
-                            Tamamlandı
-                        {% else %}
-                        % {{ watched_content.watched_percentage |floatformat:2  }} tamamlandı | 
-                          <span>
-                            <a  class="btn btn-danger" href="{% url 'show_content' content_id=watched_content.content.id %}">
-                                İzlemeye devam et
-                            </a>
-                          </span>
-                        {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {%else%}
-                Henüz dersleri izlemeye başlamamışsın.
-            {% endif%}
-           
+        
+        <div class="row">
+            {% include "academy/partials/personalDashboard.html" %}
+            {% if students %}
+                {% include "academy/partials/teacherDashboard.html" %}
+            {% endif %}
+        
         </div>
     </div>
 {% endblock content %}

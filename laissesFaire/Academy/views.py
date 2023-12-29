@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -38,9 +39,29 @@ def logout_view(request):
 
 @login_required
 def dashboard_view(request):
-    watched_contents = WatchedContent.objects.filter(user=request.user).order_by('-last_watched_timestamp')
-    return render(request, 'academy/index.html', {"watched_contents":watched_contents})
+    user = User.objects.get(username=request.user.username)
+    user_groups = user.groups.all()
 
+    is_teacher = any(group.name == 'Öğretmen' for group in user_groups)
+    watched_contents = WatchedContent.objects.filter(user=request.user).order_by('-last_watched_timestamp')
+
+    if is_teacher:
+        students_group = Group.objects.get(name='Öğrenci')
+        students = User.objects.filter(groups=students_group)
+
+        recent_watched_contents = WatchedContent.objects.filter(
+            user__groups=students_group
+        ).order_by('-last_watched_timestamp')[:10]
+        
+        return render(request, 'academy/index.html', {"watched_contents":watched_contents, "students": students, "recent_watched_contents": recent_watched_contents})
+
+    else:
+        return render(request, 'academy/index.html', {"watched_contents":watched_contents})
+
+
+
+
+    
 
 @login_required
 def profile_view(request):
